@@ -18,30 +18,55 @@ WOOD_BUTTON_HOVER.blit(filtre, (0, 0), special_flags=pygame.BLEND_RGBA_ADD)
 
 POPUP_FRAME = pygame.image.load(os.path.join(BASE_DIR, "..", "assets", "img", "popup_frame.png"))
 GAME_OVER_IMG = pygame.image.load(os.path.join(BASE_DIR, "..", "assets", "img", "game_over.png"))
+FRUIT_SIZE = (70, 70)
 
 fruits_src = {
-    "apple": pygame.image.load(os.path.join(
-        BASE_DIR, "..", "assets", "img", "fruits", "apple.png")
+    "apple": pygame.transform.scale(
+            pygame.image.load(os.path.join(
+            BASE_DIR, "..", "assets", "img", "fruits", "apple.png")
+        ),
+        FRUIT_SIZE
     ),
-    "banana": pygame.image.load(os.path.join(
+    "banana": pygame.transform.scale(
+        pygame.image.load(os.path.join(
         BASE_DIR, "..", "assets", "img", "fruits", "banana.png")
+        ),
+        FRUIT_SIZE
     ),
-    "lemon": pygame.image.load(os.path.join(
+    "lemon": pygame.transform.scale(
+        pygame.image.load(os.path.join(
         BASE_DIR, "..", "assets", "img", "fruits", "lemon.png")
+        ),
+        FRUIT_SIZE
     ),
-    "mango": pygame.image.load(os.path.join(
+    "mango": pygame.transform.scale(
+        pygame.image.load(os.path.join(
         BASE_DIR, "..", "assets", "img", "fruits", "mango.png")
+        ),
+        FRUIT_SIZE
     ),
-    "pear": pygame.image.load(os.path.join(
+    "pear": pygame.transform.scale(
+        pygame.image.load(os.path.join(
         BASE_DIR, "..", "assets", "img", "fruits", "pear.png")
+        ),
+        FRUIT_SIZE
     ),
-    "pumpkin": pygame.image.load(os.path.join(
+    "pumpkin": pygame.transform.scale(
+        pygame.image.load(os.path.join(
         BASE_DIR, "..", "assets", "img", "fruits", "pumpkin.png")
+        ),
+        FRUIT_SIZE
     ),
-    "strawberry": pygame.image.load(os.path.join(
+    "strawberry": pygame.transform.scale(
+        pygame.image.load(os.path.join(
         BASE_DIR, "..", "assets", "img", "fruits", "strawberry.png")
+        ),
+        FRUIT_SIZE
     ),
-    "watermelon": pygame.image.load(os.path.join(
+    "watermelon": pygame.transform.scale(
+        pygame.image.load(os.path.join(
         BASE_DIR, "..", "assets", "img", "fruits", "watermelon.png")
-    ),
+        ),
+        FRUIT_SIZE
+    )
 }

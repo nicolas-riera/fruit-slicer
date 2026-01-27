@@ -23,7 +23,7 @@ if __name__ == "__main__":
     pygame.key.set_repeat(400, 50)
 
     screen = pygame.display.set_mode((1280, 720))
-    my_fonts = pygame.font.Font(LIBREATIONSANS_FONT_PATH, 30), pygame.font.Font(LIBREATIONSANS_FONT_PATH, 50), pygame.font.Font(MANGAT_FONT_PATH, 30)
+    my_fonts = pygame.font.Font(LIBREATIONSANS_FONT_PATH, 30), pygame.font.Font(LIBREATIONSANS_FONT_PATH, 50), pygame.font.Font(MANGAT_FONT_PATH, 30), pygame.font.Font(MANGAT_FONT_PATH, 20)
     clock = pygame.time.Clock()
 
     menu(screen, clock, my_fonts)

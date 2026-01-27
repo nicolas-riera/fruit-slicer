@@ -15,3 +15,6 @@ WOOD_BUTTON_HOVER = WOOD_BUTTON.copy()
 filtre = pygame.Surface(WOOD_BUTTON.get_size(), pygame.SRCALPHA)
 filtre.fill((25, 10, 0, 0))
 WOOD_BUTTON_HOVER.blit(filtre, (0, 0), special_flags=pygame.BLEND_RGBA_ADD)
+
+POPUP_FRAME = pygame.image.load(os.path.join(BASE_DIR, "..", "assets", "img", "popup_frame.png"))
+GAME_OVER_IMG = pygame.image.load(os.path.join(BASE_DIR, "..", "assets", "img", "game_over.png"))

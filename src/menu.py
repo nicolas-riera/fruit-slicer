@@ -1,6 +1,5 @@
 # Libraries
 
-import os
 import pygame
 
 from src.assets_loading import LOGO_TITLE, BACKGROUND_IMG, WOOD_BUTTON, WOOD_BUTTON_HOVER

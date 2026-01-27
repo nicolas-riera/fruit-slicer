@@ -54,8 +54,6 @@ def menu(screen, clock, my_fonts):
 
         play_button, option_button = menu_rendering(screen, my_fonts, play_hover, option_hover)
 
-        # Logic
-
         if escpressed:
             pygame.quit()
             raise SystemExit

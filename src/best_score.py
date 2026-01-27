@@ -11,7 +11,7 @@ FILE_PATH = get_gamedata_path("best_score.txt")
 def read_best_score_file():
 
     '''
-    Read the config file from the file path FILE_PATH found in /src/config.py file.
+    Read the config file from the file path FILE_PATH
     For now only contains dark mode state
     ### RETURN
             [str]

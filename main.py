@@ -8,7 +8,8 @@ from src.menu import *
 # Variables
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-FONT_PATH = os.path.join(BASE_DIR, "assets", "font", "LiberationSans-Regular.ttf")
+LIBREATIONSANS_FONT_PATH = os.path.join(BASE_DIR, "assets", "font", "LiberationSans-Regular.ttf")
+MANGAT_FONT_PATH = os.path.join(BASE_DIR, "assets", "font", "mangat.ttf")
 
 # Main program
 
@@ -22,7 +23,7 @@ if __name__ == "__main__":
     pygame.key.set_repeat(400, 50)
 
     screen = pygame.display.set_mode((1280, 720))
-    my_fonts = pygame.font.Font(FONT_PATH, 30), pygame.font.Font(FONT_PATH, 50)
+    my_fonts = pygame.font.Font(LIBREATIONSANS_FONT_PATH, 30), pygame.font.Font(LIBREATIONSANS_FONT_PATH, 50), pygame.font.Font(MANGAT_FONT_PATH, 30)
     clock = pygame.time.Clock()
 
     menu(screen, clock, my_fonts)

@@ -1,31 +1,45 @@
 # Libraries
 
 import pygame
+import random
+import string
 
-from src.assets_loading import BACKGROUND_IMG
+from src.ui import ui_render
+from .pygame_events import pygame_events
+from src.assets_loading import fruits_src
 
 # Functions
 
-def rendering(screen):
+def create_fruit(fruits):
+    fruit_name = random.choice(list(fruits_src.items()))
+    fruits[fruit_name] = [
+        (random.randint(-400, 1500), random.randint(-100, -10)), random.choice(string.ascii_letters)
+    ]
 
-    background_rect = BACKGROUND_IMG.get_rect(topleft=(0, 0))
-    background_scaled = pygame.transform.smoothscale(BACKGROUND_IMG, (BACKGROUND_IMG.get_size()[0]*0.84, BACKGROUND_IMG.get_size()[1]*0.84))
-    screen.blit(background_scaled, background_rect)
+    return fruits
 
-def game(screen, clock, events, mouseclicked, escpressed:bool):
+
+def game(screen, clock):
 
     running = True
+    # fruits_pos = {
+    #     "apple0": [(300, 200), "k"]
+    # }
+
+    fruits = {}
 
     while running:
-        
-        rendering(screen)
-
-        # Logic
+        events, mouseclicked, escpressed = pygame_events()
 
         if escpressed:
             running = False
-            continue
 
-        pygame.display.flip()  
+        ui_render(screen)
+        fruits = create_fruit(fruits)
+
+        # Logic
+
+
+        pygame.display.flip()
         clock.tick(60)
 

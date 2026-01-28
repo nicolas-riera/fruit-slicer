@@ -2,9 +2,9 @@
 
 import pygame
 
-from src.ui import ui_render
-from .pygame_events import pygame_events
-from src.fruits import *
+from src.game.ui import ui_render
+from src.pygame_events import pygame_events
+from src.game.fruits import *
 
 # Functions
 

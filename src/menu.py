@@ -4,7 +4,7 @@ import pygame
 
 from src.assets_loading import LOGO_TITLE, BACKGROUND_IMG, WOOD_BUTTON, WOOD_BUTTON_HOVER
 from src.pygame_events import *
-from src.game import game
+from src.game.game import game
 
 # Functions
 

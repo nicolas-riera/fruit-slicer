@@ -1,10 +1,15 @@
+# Libraries
+
 import pygame
 import random
 import string
 
 from src.assets_loading import fruits_src
 
+# Functions
+
 def create_fruit(fruits):
+
     pos = pygame.Vector2(float(random.randint(0, 1280)), float(random.randint(720, 800)))
 
     if pos[0] < 300: # means fruit is at left so needs to go right
@@ -22,10 +27,12 @@ def create_fruit(fruits):
     return fruits
 
 def fruits_render(screen, fruits):
+
     for fruit in fruits.values():
         screen.blit(fruit["fruit_img"][1], fruit["pos"])
 
 def move_fruits(screen, fruits, dt):
+    
     for fruit in fruits.values():
         fruit["velocity"][1] += 1000 * dt #y velocity increasing
         fruit["velocity"][0] += fruit["velocity"][0] * dt #x velocity linear

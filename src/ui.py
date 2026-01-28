@@ -1,9 +1,0 @@
-import pygame
-
-from src.assets_loading import BACKGROUND_IMG
-
-def ui_render(screen):
-    # background_rect = BACKGROUND_IMG.get_rect(topleft=(0, 0))
-    # background_scaled = pygame.transform.smoothscale(BACKGROUND_IMG, (BACKGROUND_IMG.get_size()[0]*0.84, BACKGROUND_IMG.get_size()[1]*0.84))
-    # screen.blit(background_scaled, background_rect)
-    screen.fill((0, 0, 0))

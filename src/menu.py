@@ -5,6 +5,7 @@ import pygame
 from src.assets_loading import LOGO_TITLE_RECT, LOGO_TITLE_SCALED, BACKGROUND_SCALED, BACKGROUND_RECT, WOOD_BUTTON, WOOD_BUTTON_HOVER
 from src.pygame_events import *
 from src.game.game import game
+from src.options import options
 
 # Functions
 
@@ -62,8 +63,7 @@ def menu(screen, clock, my_fonts):
                 if play_button.collidepoint(pygame.mouse.get_pos()):
                     game(screen, clock, my_fonts)
                 else:
-                    #tbd option
-                    pass
+                    options(screen, clock, my_fonts, screen_scale)
             else:
                 pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
         else:

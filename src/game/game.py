@@ -3,7 +3,7 @@
 import pygame
 import time
 
-from src.game.ui import ui_render
+from src.game.ui import *
 from src.pygame_events import pygame_events
 from src.game.fruits import *
 from src.game.keyboard_input import keyboard_input
@@ -97,11 +97,14 @@ def game(screen, clock, my_fonts):
 
                 if counter % fruit_rate == 0:
                     fruits = create_fruit(fruits)
+
+                fruits_render(screen, fruits, my_fonts)
+
             else:
+                fruits_render(screen, fruits, my_fonts)
+                frozen_effect(screen)
                 if time.monotonic() - freeze_time >= 3.0:
                     freeze = False
-
-            fruits_render(screen, fruits, my_fonts)
                     
             fruits, game_over, freeze, freeze_time, score = usr_slice(events, fruits, score, game_over, freeze, freeze_time)
 

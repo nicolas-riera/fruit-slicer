@@ -17,9 +17,9 @@ BACKGROUND_SCALED = pygame.transform.smoothscale(BACKGROUND_IMG, (BACKGROUND_IMG
 
 WOOD_BUTTON = pygame.image.load(os.path.join(BASE_DIR, "..", "assets", "img", "wood_button.png"))
 WOOD_BUTTON_HOVER = WOOD_BUTTON.copy()
-filtre = pygame.Surface(WOOD_BUTTON.get_size(), pygame.SRCALPHA)
-filtre.fill((25, 10, 0, 0))
-WOOD_BUTTON_HOVER.blit(filtre, (0, 0), special_flags=pygame.BLEND_RGBA_ADD)
+filter = pygame.Surface(WOOD_BUTTON.get_size(), pygame.SRCALPHA)
+filter.fill((25, 10, 0, 0))
+WOOD_BUTTON_HOVER.blit(filter, (0, 0), special_flags=pygame.BLEND_RGBA_ADD)
 
 POPUP_FRAME = pygame.image.load(os.path.join(BASE_DIR, "..", "assets", "img", "popup_frame.png"))
 POPUP_FRAME_RECT = POPUP_FRAME.get_rect(topleft=(260, 5))
@@ -110,4 +110,8 @@ X_BLACK_SCALED = pygame.transform.smoothscale(X_BLACK, (X_BLACK.get_size()[0]*0.
 
 X_RED = pygame.image.load(os.path.join(BASE_DIR, "..", "assets", "img", "X_red.png"))
 X_RED_SCALED = pygame.transform.smoothscale(X_RED, (X_RED.get_size()[0]*0.1, X_RED.get_size()[1]*0.1))
+
+FROZEN_EFFECT = pygame.image.load(os.path.join(BASE_DIR, "..", "assets", "img", "frozen_effect.png"))
+FROZEN_EFFECT_SCALED = pygame.transform.scale(FROZEN_EFFECT, (FROZEN_EFFECT.get_size()[0]*5, FROZEN_EFFECT.get_size()[1]*5))
+FROZEN_EFFECT_RECT = FROZEN_EFFECT_SCALED.get_rect(center=(640, 360))
 

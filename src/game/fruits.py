@@ -3,8 +3,13 @@
 import pygame
 import random
 import string
+import itertools
 
 from src.assets_loading import FRUITS_SRC
+
+# Variables 
+
+fruit_id_gen = itertools.count()
 
 # Functions
 
@@ -17,12 +22,12 @@ def create_fruit(fruits):
     else: # then its the opposite ;D
         velocity = pygame.Vector2(float(random.randint(-500, -20)), float(random.randint(-1250, -1000)))
 
-    fruits[len(fruits)] = {
+    fruits[next(fruit_id_gen)] = {
         "fruit_img": random.choice(list(FRUITS_SRC.items())),
         "pos": pos,
         "rotation": 0,
         "velocity":velocity,
-        "letters": random.choice(string.ascii_letters).lower(),
+        "letters": random.choice([l for l in string.ascii_lowercase if l not in  {fruit["letters"] for fruit in fruits.values()}]).lower(),
     }
 
     return fruits

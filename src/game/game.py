@@ -16,7 +16,7 @@ def reset_values():
 
     fruits = {}
     counter = 0 #temporary just for now for me to test new fruits to not be popping all the time 
-    fruit_rate = 15
+    fruit_rate = 60
     freeze = False
     freeze_time = 0
     score = 0
@@ -54,7 +54,7 @@ def usr_slice(events, fruits, score, game_over, freeze, freeze_time):
         else:
             score += len(to_delete)
 
-    return game_over, freeze, freeze_time, score
+    return fruits, game_over, freeze, freeze_time, score
 
 def game(screen, clock, my_fonts):
 
@@ -85,10 +85,10 @@ def game(screen, clock, my_fonts):
                 running = False
         else:
 
+            fruits = move_fruits(screen, fruits, dt)
             fruits_render(screen, fruits, my_fonts)
 
             if not freeze:
-                fruits = move_fruits(screen, fruits, dt)
 
                 fruit_id = check_fruits_out()
                 if fruit_id:
@@ -100,7 +100,7 @@ def game(screen, clock, my_fonts):
                 if time.monotonic() - freeze_time >= 3.0:
                     freeze = False
                     
-            game_over, freeze, freeze_time, score = usr_slice(events, fruits, score, game_over, freeze, freeze_time)
+            fruits, game_over, freeze, freeze_time, score = usr_slice(events, fruits, score, game_over, freeze, freeze_time)
 
         counter += 1
         pygame.display.flip()

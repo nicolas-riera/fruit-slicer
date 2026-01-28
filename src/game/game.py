@@ -14,6 +14,8 @@ def game(screen, clock):
 
     fruits = {}
     counter = 0 #temporary just for now for me to test new fruits to not be popping all the time 
+    fruit_rate = 100
+
     while running:
         dt = clock.tick(60) / 1000.0
 
@@ -30,7 +32,7 @@ def game(screen, clock):
         if fruit_id:
             del fruits[fruit_id]
 
-        if counter % 30 == 0 or counter == 0:
+        if counter % fruit_rate == 0:
             fruits = create_fruit(fruits)
             print(fruits)
 

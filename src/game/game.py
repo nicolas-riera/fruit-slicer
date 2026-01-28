@@ -87,9 +87,9 @@ def game(screen, clock, my_fonts):
 
             if not freeze:
 
-                fruits = move_fruits(screen, fruits, dt)
+                fruits = move_fruits(fruits, dt)
 
-                out_fruits_id = fruits_out_id(fruits)
+                out_fruits_id = fruits_out_id(screen, fruits)
                 if out_fruits_id:
                     for id in out_fruits_id:
                         if fruits[id]["fruit_img"][0] != "bomb" and fruits[id]["fruit_img"][0] != "ice":

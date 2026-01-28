@@ -45,7 +45,7 @@ def fruits_render(screen, fruits, my_fonts):
         fruit_letter = my_fonts[0].render(fruit["letters"].upper(), True, (254, 250, 181))
         screen.blit(fruit_letter, (fruit["pos"][0], fruit["pos"][1] - 60))
 
-def move_fruits(screen, fruits, dt):
+def move_fruits(fruits, dt):
     
     for fruit in fruits.values():
         fruit["velocity"][1] += 1000 * dt #y velocity increasing
@@ -56,12 +56,12 @@ def move_fruits(screen, fruits, dt):
 
     return fruits
 
-def fruits_out_id(fruits):
+def fruits_out_id(screen, fruits):
     ids = []
 
     for fruit_id, fruit_data in fruits.items():
         if time.time() - fruit_data["time_creation"] > 1:
-            if fruit_data["pos"][0] > 1280 or fruit_data["pos"][1] > 720:
+            if fruit_data["pos"][1] > (screen.get_height() + 50):
                 ids.append(fruit_id)
 
     return ids

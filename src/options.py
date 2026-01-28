@@ -18,6 +18,9 @@ def option_rendering(screen, my_fonts, clear_data_ok_timer):
     screen_fade.set_alpha(80)
     screen.blit(screen_fade, (0, 0))
 
+    clear_best_score_button_text = my_fonts[4].render("Options", True, (254, 250, 181))
+    screen.blit(clear_best_score_button_text, (525, 105))
+
     wood_button_scaled = pygame.transform.smoothscale(WOOD_BUTTON, (WOOD_BUTTON.get_size()[0]*0.27, WOOD_BUTTON.get_size()[1]*0.27))
     wood_button_hover_scaled = pygame.transform.smoothscale(WOOD_BUTTON_HOVER, (WOOD_BUTTON_HOVER.get_size()[0]*0.27, WOOD_BUTTON_HOVER.get_size()[1]*0.27))
     wood_button_rect_change_scale = wood_button_scaled.get_rect(center=(640, 290))

@@ -45,8 +45,6 @@ def menu_rendering(screen, my_fonts):
 
 def menu(screen, clock, my_fonts):
 
-    screen_scale = 1
-
     while True:
 
         events, mouseclicked, escpressed = pygame_events()
@@ -63,7 +61,7 @@ def menu(screen, clock, my_fonts):
                 if play_button.collidepoint(pygame.mouse.get_pos()):
                     game(screen, clock, my_fonts)
                 else:
-                    options(screen, clock, my_fonts, screen_scale)
+                    options(screen, clock, my_fonts)
             else:
                 pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
         else:

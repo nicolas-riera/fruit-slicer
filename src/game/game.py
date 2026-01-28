@@ -67,11 +67,11 @@ def game(screen, clock, my_fonts):
 
     while running:
 
-        dt = clock.tick(60) / 1000.0
+        dt = clock.tick(75) / 1000.0
 
         events, mouseclicked, escpressed = pygame_events()
 
-        ui_render(screen, background_scaled, background_rect)
+        ui_render(screen, background_scaled, background_rect, strike)
 
         if escpressed:
             running = False

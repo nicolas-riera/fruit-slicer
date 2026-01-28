@@ -8,7 +8,7 @@ from src.pygame_events import pygame_events
 from src.game.fruits import *
 from src.game.keyboard_input import keyboard_input
 from src.popup import replay_menu_popup
-from src.best_score import write_best_score
+from src.best_score import *
 
 # Functions
 
@@ -75,7 +75,8 @@ def game(screen, clock, my_fonts):
             running = False
         
         elif game_over:
-            write_best_score(score)
+            if score > read_best_score_file():
+                write_best_score(score)
             game_over, usr_choice = replay_menu_popup(screen, my_fonts, mouseclicked, score)
             if usr_choice == 1:
                 fruits, counter, fruit_rate, freeze, freeze_time, score, strike, game_over = reset_values()

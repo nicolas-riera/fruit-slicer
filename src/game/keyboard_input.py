@@ -19,6 +19,8 @@ def keyboard_input(events):
     for event in events:
         if event.type == pygame.KEYDOWN:
             char = event.unicode
-            if unicodedata.category(char).startswith("L"):  
+            if char == "":
                 return char
+            elif unicodedata.category(char).startswith("L"):  
+                return char.lower()
     return ""

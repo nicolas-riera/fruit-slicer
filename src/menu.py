@@ -59,7 +59,7 @@ def menu(screen, clock, my_fonts):
             if mouseclicked:
                 pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW) 
                 if play_button.collidepoint(pygame.mouse.get_pos()):
-                    game(screen, clock, events, mouseclicked, escpressed)
+                    game(screen, clock)
                 else:
                     #tbd option
                     pass

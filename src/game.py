@@ -2,30 +2,39 @@
 
 import pygame
 
-from src.assets_loading import BACKGROUND_IMG
+from src.ui import ui_render
+from .pygame_events import pygame_events
+from src.fruits import *
 
 # Functions
 
-def rendering(screen):
-
-    background_rect = BACKGROUND_IMG.get_rect(topleft=(0, 0))
-    background_scaled = pygame.transform.smoothscale(BACKGROUND_IMG, (BACKGROUND_IMG.get_size()[0]*0.84, BACKGROUND_IMG.get_size()[1]*0.84))
-    screen.blit(background_scaled, background_rect)
-
-def game(screen, clock, events, mouseclicked, escpressed:bool):
+def game(screen, clock):
 
     running = True
 
+    fruits = {}
+    counter = 0 #temporary just for now for me to test new fruits to not be popping all the time 
     while running:
-        
-        rendering(screen)
+        dt = clock.tick(60) / 1000.0
 
-        # Logic
+        events, mouseclicked, escpressed = pygame_events()
 
         if escpressed:
             running = False
-            continue
 
-        pygame.display.flip()  
-        clock.tick(60)
+        ui_render(screen)
+        fruits_render(screen, fruits)
+        fruits = move_fruits(screen, fruits, dt)
 
+        fruit_id = check_fruits_out()
+        if fruit_id:
+            del fruits[fruit_id]
+
+        if counter % 30 == 0 or counter == 0:
+            fruits = create_fruit(fruits)
+            print(fruits)
+
+        # Logic
+
+        counter += 1
+        pygame.display.flip()

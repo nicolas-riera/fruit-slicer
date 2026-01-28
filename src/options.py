@@ -18,25 +18,25 @@ def option_rendering(screen, my_fonts):
 
     wood_button_scaled = pygame.transform.smoothscale(WOOD_BUTTON, (WOOD_BUTTON.get_size()[0]*0.27, WOOD_BUTTON.get_size()[1]*0.27))
     wood_button_hover_scaled = pygame.transform.smoothscale(WOOD_BUTTON_HOVER, (WOOD_BUTTON_HOVER.get_size()[0]*0.27, WOOD_BUTTON_HOVER.get_size()[1]*0.27))
+    wood_button_rect_change_scale = wood_button_scaled.get_rect(center=(640, 290))
     wood_button_rect_clear_best_score = wood_button_scaled.get_rect(center=(640, 440))
-    wood_button_rect_change_scale = wood_button_scaled.get_rect(center=(640, 510))
     wood_button_rect_back = wood_button_scaled.get_rect(center=(640, 590))
 
-    change_scale_button = pygame.Rect((464, 390, 356, 100))
+    change_scale_button = pygame.Rect((464, 238, 356, 100))
     if change_scale_button.collidepoint(pygame.mouse.get_pos()):
         screen.blit(wood_button_hover_scaled, wood_button_rect_change_scale) 
     else:
         screen.blit(wood_button_scaled, wood_button_rect_change_scale) 
-    change_scale_button_text = my_fonts[2].render("Change Window Size", True, (254, 250, 181))
-    screen.blit(change_scale_button_text, (597, 416))
+    change_scale_button_text = my_fonts[2].render("Change Size", True, (254, 250, 181))
+    screen.blit(change_scale_button_text, (527, 266))
 
-    clear_best_score_button = pygame.Rect((464, 460, 356, 100))
+    clear_best_score_button = pygame.Rect((464, 392, 356, 100))
     if clear_best_score_button.collidepoint(pygame.mouse.get_pos()):
         screen.blit(wood_button_hover_scaled, wood_button_rect_clear_best_score) 
     else:
         screen.blit(wood_button_scaled, wood_button_rect_clear_best_score) 
-    clear_best_score_button_text = my_fonts[2].render("Clear Best Score", True, (254, 250, 181))
-    screen.blit(clear_best_score_button_text, (597, 416))
+    clear_best_score_button_text = my_fonts[2].render("Clear Data", True, (254, 250, 181))
+    screen.blit(clear_best_score_button_text, (537, 416))
 
     back_button = pygame.Rect((464, 540, 356, 100))
     if back_button.collidepoint(pygame.mouse.get_pos()):
@@ -44,7 +44,7 @@ def option_rendering(screen, my_fonts):
     else:
         screen.blit(wood_button_scaled, wood_button_rect_back) 
     back_button_text = my_fonts[2].render("Back", True, (254, 250, 181))
-    screen.blit(back_button_text, (564, 567)) 
+    screen.blit(back_button_text, (598, 567)) 
 
     return change_scale_button, clear_best_score_button, back_button
 

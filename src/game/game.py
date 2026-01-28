@@ -8,7 +8,7 @@ from src.game.fruits import *
 
 # Functions
 
-def game(screen, clock):
+def game(screen, clock, my_fonts):
 
     running = True
 
@@ -25,7 +25,7 @@ def game(screen, clock):
             running = False
 
         ui_render(screen)
-        fruits_render(screen, fruits)
+        fruits_render(screen, fruits, my_fonts)
         fruits = move_fruits(screen, fruits, dt)
 
         fruit_id = check_fruits_out()

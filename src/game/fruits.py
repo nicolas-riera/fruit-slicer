@@ -4,6 +4,7 @@ import pygame
 import random
 import string
 import itertools
+import time
 
 from src.assets_loading import FRUITS_SRC
 
@@ -28,6 +29,7 @@ def create_fruit(fruits):
         "rotation": 0,
         "velocity":velocity,
         "letters": random.choice([l for l in string.ascii_lowercase if l not in  {fruit["letters"] for fruit in fruits.values()}]).lower(),
+        "time_creation": time.time()
     }
 
     return fruits
@@ -54,6 +56,13 @@ def move_fruits(screen, fruits, dt):
 
     return fruits
 
-def check_fruits_out():
-    
-    return None
+def fruits_out_id(fruits):
+    ids = []
+
+    for fruit_id, fruit_data in fruits.items():
+        if time.time() - fruit_data["time_creation"] > 1:
+            if fruit_data["pos"][0] > 1280 or fruit_data["pos"][1] > 720:
+                ids.append(fruit_id)
+
+    return ids
+

@@ -16,7 +16,7 @@ def reset_values():
 
     fruits = {}
     counter = 0 #temporary just for now for me to test new fruits to not be popping all the time 
-    fruit_rate = 60
+    fruit_rate = 90
     freeze = False
     freeze_time = 0
     score = 0
@@ -88,12 +88,15 @@ def game(screen, clock, my_fonts):
 
                 fruits = move_fruits(screen, fruits, dt)
 
-                fruit_id = check_fruits_out()
-                if fruit_id:
-                    del fruits[fruit_id]
-                    strike += 1
-                    if strike >= 3:
-                        game_over = True
+                out_fruits_id = fruits_out_id(fruits)
+                if out_fruits_id:
+                    for id in out_fruits_id:
+                        if fruits[id]["fruit_img"][0] != "bomb" and fruits[id]["fruit_img"][0] != "ice":
+                            
+                            strike += 1
+                            if strike >= 3:
+                                game_over = True
+                        del fruits[id]
 
                 if counter % fruit_rate == 0:
                     fruits = create_fruit(fruits)

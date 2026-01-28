@@ -94,3 +94,6 @@ FRUITS_SRC = {
         FRUIT_SIZE
     )
 }
+
+X_BLACK = pygame.image.load(os.path.join(BASE_DIR, "..", "assets", "img", "X_black.png"))
+X_RED = pygame.image.load(os.path.join(BASE_DIR, "..", "assets", "img", "X_red.png"))

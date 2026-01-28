@@ -85,10 +85,9 @@ def game(screen, clock, my_fonts):
                 running = False
         else:
 
-            fruits = move_fruits(screen, fruits, dt)
-            fruits_render(screen, fruits, my_fonts)
-
             if not freeze:
+
+                fruits = move_fruits(screen, fruits, dt)
 
                 fruit_id = check_fruits_out()
                 if fruit_id:
@@ -99,6 +98,8 @@ def game(screen, clock, my_fonts):
             else:
                 if time.monotonic() - freeze_time >= 3.0:
                     freeze = False
+
+            fruits_render(screen, fruits, my_fonts)
                     
             fruits, game_over, freeze, freeze_time, score = usr_slice(events, fruits, score, game_over, freeze, freeze_time)
 

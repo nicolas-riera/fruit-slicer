@@ -2,9 +2,17 @@
 
 import pygame
 
-from src.assets_loading import BACKGROUND_SCALED, BACKGROUND_RECT, X_BLACK_SCALED, X_RED_SCALED
+from src.assets_loading import BACKGROUND_SCALED, BACKGROUND_RECT, X_BLACK_SCALED, X_RED_SCALED, FROZEN_EFFECT_RECT, FROZEN_EFFECT_SCALED
 
 # Functions
+
+def frozen_effect(screen):
+
+    filter = pygame.Surface(screen.get_size(), pygame.SRCALPHA)
+    filter.fill((0, 85, 105, 0))
+    screen.blit(filter, (0, 0), special_flags=pygame.BLEND_RGBA_ADD)
+
+    screen.blit(FROZEN_EFFECT_SCALED, FROZEN_EFFECT_RECT)
 
 def display_strikes(screen, strike):    
     for i in range(3):

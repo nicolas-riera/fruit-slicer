@@ -3,12 +3,12 @@
 import pygame
 import time
 
-from src.game.ui import ui_render
+from src.game.ui import *
 from src.pygame_events import pygame_events
 from src.game.fruits import *
 from src.game.keyboard_input import keyboard_input
 from src.popup import replay_menu_popup
-from src.best_score import write_best_score
+from src.best_score import *
 
 # Functions
 
@@ -75,7 +75,8 @@ def game(screen, clock, my_fonts):
             running = False
         
         elif game_over:
-            write_best_score(score)
+            if score > read_best_score_file():
+                write_best_score(score)
             game_over, usr_choice = replay_menu_popup(screen, my_fonts, mouseclicked, score)
             if usr_choice == 1:
                 fruits, counter, fruit_rate, freeze, freeze_time, score, strike, game_over = reset_values()
@@ -100,11 +101,14 @@ def game(screen, clock, my_fonts):
 
                 if counter % fruit_rate == 0:
                     fruits = create_fruit(fruits)
+
+                fruits_render(screen, fruits, my_fonts)
+
             else:
+                fruits_render(screen, fruits, my_fonts)
+                frozen_effect(screen)
                 if time.monotonic() - freeze_time >= 3.0:
                     freeze = False
-
-            fruits_render(screen, fruits, my_fonts)
                     
             fruits, game_over, freeze, freeze_time, score = usr_slice(events, fruits, score, game_over, freeze, freeze_time)
 

@@ -8,6 +8,7 @@ from src.pygame_events import pygame_events
 from src.game.fruits import *
 from src.game.keyboard_input import keyboard_input
 from src.popup import replay_menu_popup
+from src.best_score import write_best_score
 
 # Functions
 
@@ -48,10 +49,11 @@ def usr_slice(events, fruits, score, game_over, freeze, freeze_time):
             else:
                 del fruits[key]
 
-        if len(to_delete) > 3:
-            score += len(to_delete) + 1
-        else:
-            score += len(to_delete)
+        if not game_over:
+            if len(to_delete) > 3:
+                score += len(to_delete) + 1
+            else:
+                score += len(to_delete)
 
     return fruits, game_over, freeze, freeze_time, score
 
@@ -73,7 +75,8 @@ def game(screen, clock, my_fonts):
             running = False
         
         elif game_over:
-            game_over, usr_choice = replay_menu_popup(screen, my_fonts, mouseclicked)
+            write_best_score(score)
+            game_over, usr_choice = replay_menu_popup(screen, my_fonts, mouseclicked, score)
             if usr_choice == 1:
                 fruits, counter, fruit_rate, freeze, freeze_time, score, strike, game_over = reset_values()
                 continue

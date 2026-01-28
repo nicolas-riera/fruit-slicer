@@ -42,7 +42,7 @@ def fruits_render(screen, fruits, my_fonts):
         rotated_fruit_rect = rotated_fruit.get_rect(center=fruit["pos"])
         screen.blit(rotated_fruit, rotated_fruit_rect)
 
-        fruit_letter = my_fonts[2].render(fruit["letters"], True, (254, 250, 181))
+        fruit_letter = my_fonts[0].render(fruit["letters"].upper(), True, (254, 250, 181))
         screen.blit(fruit_letter, (fruit["pos"][0], fruit["pos"][1] - 60))
 
 def move_fruits(screen, fruits, dt):

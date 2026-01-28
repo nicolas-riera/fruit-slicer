@@ -3,7 +3,6 @@
 import pygame
 import time
 
-from src.assets_loading import BACKGROUND_IMG
 from src.game.ui import ui_render
 from src.pygame_events import pygame_events
 from src.game.fruits import *
@@ -59,9 +58,6 @@ def usr_slice(events, fruits, score, game_over, freeze, freeze_time):
 def game(screen, clock, my_fonts):
 
     running = True
-    
-    background_rect = BACKGROUND_IMG.get_rect(topleft=(0, 0))
-    background_scaled = pygame.transform.smoothscale(BACKGROUND_IMG, (BACKGROUND_IMG.get_size()[0]*0.84, BACKGROUND_IMG.get_size()[1]*0.84))
 
     fruits, counter, fruit_rate, freeze, freeze_time, score, strike, game_over = reset_values()
 
@@ -71,7 +67,7 @@ def game(screen, clock, my_fonts):
 
         events, mouseclicked, escpressed = pygame_events()
 
-        ui_render(screen, background_scaled, background_rect, strike)
+        ui_render(screen, my_fonts, score, strike)
 
         if escpressed:
             running = False
@@ -92,6 +88,9 @@ def game(screen, clock, my_fonts):
                 fruit_id = check_fruits_out()
                 if fruit_id:
                     del fruits[fruit_id]
+                    strike += 1
+                    if strike >= 3:
+                        game_over = True
 
                 if counter % fruit_rate == 0:
                     fruits = create_fruit(fruits)

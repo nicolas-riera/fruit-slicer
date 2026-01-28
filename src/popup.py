@@ -2,7 +2,7 @@
 
 import pygame
 
-from src.assets_loading import WOOD_BUTTON, WOOD_BUTTON_HOVER, POPUP_FRAME, GAME_OVER_IMG
+from src.assets_loading import WOOD_BUTTON, WOOD_BUTTON_HOVER, POPUP_FRAME_RECT, POPUP_FRAME_SCALED, GAME_OVER_RECT, GAME_OVER_SCALED
 
 # Functions
 
@@ -13,13 +13,9 @@ def popup_rendering(screen, my_fonts):
     screen_fade.set_alpha(160)
     screen.blit(screen_fade, (0, 0))
 
-    popup_frame_rect = POPUP_FRAME.get_rect(topleft=(260, 5))
-    popup_frame_scaled = pygame.transform.smoothscale(POPUP_FRAME, (POPUP_FRAME.get_size()[0]*0.37, POPUP_FRAME.get_size()[1]*0.37))
-    screen.blit(popup_frame_scaled, popup_frame_rect) 
-
-    game_over_rect = GAME_OVER_IMG.get_rect(topleft=(349, 160))
-    game_over_scaled = pygame.transform.smoothscale(GAME_OVER_IMG, (GAME_OVER_IMG.get_size()[0]*0.3, GAME_OVER_IMG.get_size()[1]*0.3))
-    screen.blit(game_over_scaled, game_over_rect) 
+    screen.blit(POPUP_FRAME_SCALED, POPUP_FRAME_RECT) 
+    
+    screen.blit(GAME_OVER_SCALED, GAME_OVER_RECT) 
 
     wood_button_scaled = pygame.transform.smoothscale(WOOD_BUTTON, (WOOD_BUTTON.get_size()[0]*0.19, WOOD_BUTTON.get_size()[1]*0.19))
     wood_button_hover_scaled = pygame.transform.smoothscale(WOOD_BUTTON_HOVER, (WOOD_BUTTON_HOVER.get_size()[0]*0.19, WOOD_BUTTON_HOVER.get_size()[1]*0.19))

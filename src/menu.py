@@ -2,26 +2,22 @@
 
 import pygame
 
-from src.assets_loading import LOGO_TITLE, BACKGROUND_IMG, WOOD_BUTTON, WOOD_BUTTON_HOVER
+from src.assets_loading import LOGO_TITLE_RECT, LOGO_TITLE_SCALED, BACKGROUND_SCALED, BACKGROUND_RECT, WOOD_BUTTON, WOOD_BUTTON_HOVER
 from src.pygame_events import *
 from src.game.game import game
 
 # Functions
 
 def menu_rendering(screen, my_fonts):
-
-    background_rect = BACKGROUND_IMG.get_rect(topleft=(0, 0))
-    background_scaled = pygame.transform.smoothscale(BACKGROUND_IMG, (BACKGROUND_IMG.get_size()[0]*0.84, BACKGROUND_IMG.get_size()[1]*0.84))
-    screen.blit(background_scaled, background_rect)
+    
+    screen.blit(BACKGROUND_SCALED, BACKGROUND_RECT)
 
     screen_fade = pygame.Surface((screen.get_width(), screen.get_height()))
     screen_fade.fill((0, 0, 0))
     screen_fade.set_alpha(80)
     screen.blit(screen_fade, (0, 0))
 
-    logo_title_rect = LOGO_TITLE.get_rect(center=(1130, 550))
-    logo_title_scaled = pygame.transform.smoothscale(LOGO_TITLE, (LOGO_TITLE.get_size()[0]*0.4, LOGO_TITLE.get_size()[1]*0.4))
-    screen.blit(logo_title_scaled, logo_title_rect) 
+    screen.blit(LOGO_TITLE_SCALED, LOGO_TITLE_RECT) 
 
     wood_button_scaled = pygame.transform.smoothscale(WOOD_BUTTON, (WOOD_BUTTON.get_size()[0]*0.27, WOOD_BUTTON.get_size()[1]*0.27))
     wood_button_hover_scaled = pygame.transform.smoothscale(WOOD_BUTTON_HOVER, (WOOD_BUTTON_HOVER.get_size()[0]*0.27, WOOD_BUTTON_HOVER.get_size()[1]*0.27))

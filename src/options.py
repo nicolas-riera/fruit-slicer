@@ -7,6 +7,10 @@ from src.assets_loading import BACKGROUND_RECT, BACKGROUND_SCALED, WOOD_BUTTON, 
 from src.pygame_events import pygame_events
 from src.best_score import write_best_score
 
+# Variables
+
+SCREEN_SCALES = [0.5, 0.75, 1, 1.5, 2]
+
 # Functions
 
 def option_rendering(screen, my_fonts, clear_data_ok_timer):
@@ -58,6 +62,13 @@ def option_rendering(screen, my_fonts, clear_data_ok_timer):
 
     return change_scale_button, clear_best_score_button, back_button
 
+def change_screen_scale(screen_scale):
+
+    if SCREEN_SCALES[SCREEN_SCALES.index(screen_scale)] == 2:
+        return pygame.display.set_mode((1280*SCREEN_SCALES[0], 720*SCREEN_SCALES[0])), SCREEN_SCALES[0]
+    else:
+        return pygame.display.set_mode((1280*SCREEN_SCALES[SCREEN_SCALES.index(screen_scale)+1], 720*SCREEN_SCALES[SCREEN_SCALES.index(screen_scale)+1])), SCREEN_SCALES[SCREEN_SCALES.index(screen_scale)+1]
+
 def options(screen, clock, my_fonts, screen_scale):
 
     clear_data_ok_timer = 0
@@ -75,8 +86,7 @@ def options(screen, clock, my_fonts, screen_scale):
             if mouseclicked:
                 pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW) 
                 if change_scale_button.collidepoint(pygame.mouse.get_pos()):
-                    # tbd scale
-                    pass
+                    screen, screen_scale = change_screen_scale(screen_scale)
                 elif clear_best_score_button.collidepoint(pygame.mouse.get_pos()):
                     write_best_score(0)
                     clear_data_ok_timer = time.monotonic()
@@ -90,3 +100,5 @@ def options(screen, clock, my_fonts, screen_scale):
 
         pygame.display.flip()  
         clock.tick(60)
+
+    return screen_scale

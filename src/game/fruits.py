@@ -4,7 +4,7 @@ import pygame
 import random
 import string
 
-from src.assets_loading import fruits_src
+from src.assets_loading import FRUITS_SRC
 
 # Functions
 
@@ -18,7 +18,7 @@ def create_fruit(fruits):
         velocity = pygame.Vector2(float(random.randint(-500, -20)), float(random.randint(-1250, -1000)))
 
     fruits[len(fruits)] = {
-        "fruit_img": random.choice(list(fruits_src.items())),
+        "fruit_img": random.choice(list(FRUITS_SRC.items())),
         "pos": pos,
         "rotation": 0,
         "velocity":velocity,

@@ -1,6 +1,7 @@
 # Libraries
 
 import pygame
+import time
 
 from src.assets_loading import BACKGROUND_IMG
 from src.game.ui import ui_render
@@ -15,12 +16,45 @@ def reset_values():
 
     fruits = {}
     counter = 0 #temporary just for now for me to test new fruits to not be popping all the time 
-    fruit_rate = 100
+    fruit_rate = 15
+    freeze = False
+    freeze_time = 0
     score = 0
     strike = 0
     game_over = False
 
-    return fruits, counter, fruit_rate, score, strike, game_over
+    return fruits, counter, fruit_rate, freeze, freeze_time, score, strike, game_over
+
+def usr_slice(events, fruits, score, game_over, freeze, freeze_time):
+
+    usr_input = keyboard_input(events)
+
+    if usr_input != "":
+        to_delete = []
+
+        for key, fruit in fruits.items():
+            if usr_input == fruit["letters"]:
+                to_delete.append(key)
+
+        for key in to_delete:
+            
+            if fruits[key]["fruit_img"][0] == "bomb":
+                game_over = True
+
+            elif fruits[key]["fruit_img"][0] == "ice":
+                freeze = True
+                freeze_time = time.monotonic()
+                del fruits[key]
+
+            else:
+                del fruits[key]
+
+        if len(to_delete) > 3:
+            score += len(to_delete) + 1
+        else:
+            score += len(to_delete)
+
+    return game_over, freeze, freeze_time, score
 
 def game(screen, clock, my_fonts):
 
@@ -29,7 +63,7 @@ def game(screen, clock, my_fonts):
     background_rect = BACKGROUND_IMG.get_rect(topleft=(0, 0))
     background_scaled = pygame.transform.smoothscale(BACKGROUND_IMG, (BACKGROUND_IMG.get_size()[0]*0.84, BACKGROUND_IMG.get_size()[1]*0.84))
 
-    fruits, counter, fruit_rate, score, strike, game_over = reset_values()
+    fruits, counter, fruit_rate, freeze, freeze_time, score, strike, game_over = reset_values()
 
     while running:
 
@@ -45,47 +79,28 @@ def game(screen, clock, my_fonts):
         elif game_over:
             game_over, usr_choice = replay_menu_popup(screen, my_fonts, mouseclicked)
             if usr_choice == 1:
-                fruits, counter, fruit_rate, score, strike, game_over = reset_values()
+                fruits, counter, fruit_rate, freeze, freeze_time, score, strike, game_over = reset_values()
                 continue
             elif usr_choice == 2:
                 running = False
         else:
 
             fruits_render(screen, fruits, my_fonts)
-            fruits = move_fruits(screen, fruits, dt)
 
-            fruit_id = check_fruits_out()
-            if fruit_id:
-                del fruits[fruit_id]
+            if not freeze:
+                fruits = move_fruits(screen, fruits, dt)
 
-            if counter % fruit_rate == 0:
-                fruits = create_fruit(fruits)
+                fruit_id = check_fruits_out()
+                if fruit_id:
+                    del fruits[fruit_id]
 
-            usr_input = keyboard_input(events)
-
-        if usr_input != "":
-            to_delete = []
-
-            for key, fruit in fruits.items():
-                if usr_input == fruit["letters"]:
-                    to_delete.append(key)
-
-            for key in to_delete:
-                
-                if fruits[key]["fruit_img"][0] == "bomb":
-                    game_over = True
-
-                elif fruits[key]["fruit_img"][0] == "ice":
-                    pass
-                    # tbd freeze
-
-                else:
-                    del fruits[key]
-
-            if len(to_delete) > 3:
-                score += len(to_delete) + 1
+                if counter % fruit_rate == 0:
+                    fruits = create_fruit(fruits)
             else:
-                score += len(to_delete)
+                if time.monotonic() - freeze_time >= 3.0:
+                    freeze = False
+                    
+            game_over, freeze, freeze_time, score = usr_slice(events, fruits, score, game_over, freeze, freeze_time)
 
         counter += 1
         pygame.display.flip()

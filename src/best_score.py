@@ -18,7 +18,7 @@ def read_best_score_file():
     '''
 
     with open(FILE_PATH, "r", encoding="utf-8") as f:
-        return [line.rstrip("\n") for line in f][0]
+        return int([line.rstrip("\n") for line in f][0])
     
 def write_best_score(score):
 

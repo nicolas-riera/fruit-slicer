@@ -33,6 +33,24 @@ fruits_src = {
         ),
         FRUIT_SIZE
     ),
+    "bomb": pygame.transform.scale(
+        pygame.image.load(os.path.join(
+        BASE_DIR, "..", "assets", "img", "fruits", "bomb.png")
+        ),
+        FRUIT_SIZE
+    ),
+    "cherry": pygame.transform.scale(
+        pygame.image.load(os.path.join(
+        BASE_DIR, "..", "assets", "img", "fruits", "cherry.png")
+        ),
+        FRUIT_SIZE
+    ),
+    "ice": pygame.transform.scale(
+        pygame.image.load(os.path.join(
+        BASE_DIR, "..", "assets", "img", "fruits", "ice.png")
+        ),
+        FRUIT_SIZE
+    ),
     "lemon": pygame.transform.scale(
         pygame.image.load(os.path.join(
         BASE_DIR, "..", "assets", "img", "fruits", "lemon.png")
@@ -42,6 +60,12 @@ fruits_src = {
     "mango": pygame.transform.scale(
         pygame.image.load(os.path.join(
         BASE_DIR, "..", "assets", "img", "fruits", "mango.png")
+        ),
+        FRUIT_SIZE
+    ),
+    "orange": pygame.transform.scale(
+        pygame.image.load(os.path.join(
+        BASE_DIR, "..", "assets", "img", "fruits", "orange.png")
         ),
         FRUIT_SIZE
     ),

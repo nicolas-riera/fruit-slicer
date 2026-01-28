@@ -14,6 +14,11 @@ def menu_rendering(screen, my_fonts):
     background_scaled = pygame.transform.smoothscale(BACKGROUND_IMG, (BACKGROUND_IMG.get_size()[0]*0.84, BACKGROUND_IMG.get_size()[1]*0.84))
     screen.blit(background_scaled, background_rect)
 
+    screen_fade = pygame.Surface((screen.get_width(), screen.get_height()))
+    screen_fade.fill((0, 0, 0))
+    screen_fade.set_alpha(80)
+    screen.blit(screen_fade, (0, 0))
+
     logo_title_rect = LOGO_TITLE.get_rect(center=(1130, 550))
     logo_title_scaled = pygame.transform.smoothscale(LOGO_TITLE, (LOGO_TITLE.get_size()[0]*0.4, LOGO_TITLE.get_size()[1]*0.4))
     screen.blit(logo_title_scaled, logo_title_rect) 

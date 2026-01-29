@@ -87,8 +87,8 @@ def game(screen, clock, my_fonts):
 
             if not freeze:
 
+                
                 fruits = move_fruits(fruits, dt)
-
                 out_fruits_id = fruits_out_id(screen, fruits)
                 if out_fruits_id:
                     for id in out_fruits_id:
@@ -101,7 +101,9 @@ def game(screen, clock, my_fonts):
 
                 if counter % fruit_rate == 0:
                     fruits = create_fruit(fruits)
-
+                    
+                # print(f"rotation: {fruits[0]['rotation']}")
+                # print(f"velocity: {fruits[0]['rotation_velocity']}")
                 fruits_render(screen, fruits, my_fonts)
 
             else:

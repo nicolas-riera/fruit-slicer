@@ -1,6 +1,7 @@
 Fruit-Slicer.spec
 build
 dist
+best_score.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

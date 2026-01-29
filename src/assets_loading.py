@@ -112,6 +112,6 @@ X_RED = pygame.image.load(os.path.join(BASE_DIR, "..", "assets", "img", "X_red.p
 X_RED_SCALED = pygame.transform.smoothscale(X_RED, (X_RED.get_size()[0]*0.1, X_RED.get_size()[1]*0.1))
 
 FROZEN_EFFECT = pygame.image.load(os.path.join(BASE_DIR, "..", "assets", "img", "frozen_effect.png"))
-FROZEN_EFFECT_SCALED = pygame.transform.scale(FROZEN_EFFECT, (FROZEN_EFFECT.get_size()[0]*5, FROZEN_EFFECT.get_size()[1]*5))
+FROZEN_EFFECT_SCALED = pygame.transform.scale(FROZEN_EFFECT, (FROZEN_EFFECT.get_size()[0]*1, FROZEN_EFFECT.get_size()[1]*1))
 FROZEN_EFFECT_RECT = FROZEN_EFFECT_SCALED.get_rect(center=(640, 360))
 

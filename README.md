@@ -3,6 +3,7 @@
 ![pythonversion](https://img.shields.io/badge/python-3.x-blue)
 ![pygame](https://img.shields.io/badge/pygame-required-green)
 
+![logo_title](/assets/img/logo_title.png)
 
 **Fruit Slicer** is a *Fruit Ninja–inspired* arcade game made with **Python and Pygame**.  
 The twist? You slice fruits using your **keyboard**, not the mouse or touchscreen.

@@ -77,4 +77,3 @@ def fruits_out_id(screen, fruits):
                 ids.append(fruit_id)
 
     return ids
-

@@ -29,7 +29,7 @@ GAME_OVER_IMG = pygame.image.load(os.path.join(BASE_DIR, "..", "assets", "img", 
 GAME_OVER_RECT = GAME_OVER_IMG.get_rect(topleft=(349, 160))
 GAME_OVER_SCALED = pygame.transform.smoothscale(GAME_OVER_IMG, (GAME_OVER_IMG.get_size()[0]*0.3, GAME_OVER_IMG.get_size()[1]*0.3))
 
-FRUIT_SIZE = (70, 70)
+FRUIT_SIZE = (80, 80)
 FRUITS_SRC = {
     "apple": pygame.transform.scale(
             pygame.image.load(os.path.join(

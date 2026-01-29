@@ -39,7 +39,7 @@ After downloading it, simply run ```Fruit-Slicer_[version].exe``` to launch the 
 
 - **Keyboard**:
     - Use your keyboard to slice items, all letter keys.
-    - Go back/close the game with the Escape key.
+    - Go back/pause/close the game with the Escape key.
 
 - **Mouse:**
     - Use your mouse to select buttons on the menu and popups.

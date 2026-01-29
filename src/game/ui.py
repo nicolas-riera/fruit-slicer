@@ -27,9 +27,10 @@ def display_scores(screen, my_fonts, score):
     score_text = my_fonts[2].render(f"Score : {score}", True, (254, 250, 181))
     screen.blit(score_text, (10, 10))
 
-def ui_render(screen, my_fonts, score, strike):
-    
+def game_background_render(screen):
     screen.blit(BACKGROUND_SCALED, BACKGROUND_RECT)
+
+def ui_render(screen, my_fonts, score, strike):
 
     display_strikes(screen, strike)
 

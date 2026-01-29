@@ -19,9 +19,10 @@ if __name__ == "__main__":
     pygame.font.init()
 
     pygame.display.set_caption("Fruit Slicer")
+    pygame.display.set_icon(pygame.image.load(os.path.join(BASE_DIR, "assets", "img", "logo.png")))
 
     screen = pygame.display.set_mode((1280, 720))
-    my_fonts = pygame.font.Font(LIBREATIONSANS_FONT_PATH, 30), pygame.font.Font(LIBREATIONSANS_FONT_PATH, 50), pygame.font.Font(MANGAT_FONT_PATH, 30), pygame.font.Font(MANGAT_FONT_PATH, 20)
+    my_fonts = pygame.font.Font(LIBREATIONSANS_FONT_PATH, 30), pygame.font.Font(LIBREATIONSANS_FONT_PATH, 50), pygame.font.Font(MANGAT_FONT_PATH, 30), pygame.font.Font(MANGAT_FONT_PATH, 20), pygame.font.Font(MANGAT_FONT_PATH, 50)
     clock = pygame.time.Clock()
 
     menu(screen, clock, my_fonts)

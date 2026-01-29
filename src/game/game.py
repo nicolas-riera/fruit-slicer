@@ -69,7 +69,7 @@ def game(screen, clock, my_fonts):
 
         events, mouseclicked, escpressed = pygame_events()
 
-        ui_render(screen, my_fonts, score, strike)
+        game_background_render(screen)
 
         if escpressed:
             running = False
@@ -113,6 +113,8 @@ def game(screen, clock, my_fonts):
                     freeze = False
                     
             fruits, game_over, freeze, freeze_time, score = usr_slice(events, fruits, score, game_over, freeze, freeze_time)
+
+            ui_render(screen, my_fonts, score, strike)
 
         counter += 1
         pygame.display.flip()

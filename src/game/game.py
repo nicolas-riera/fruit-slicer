@@ -19,11 +19,12 @@ def reset_values():
     fruit_rate = 90
     freeze = False
     freeze_time = 0
+    pause = False
     score = 0
     strike = 0
     game_over = False
 
-    return fruits, counter, fruit_rate, freeze, freeze_time, score, strike, game_over
+    return fruits, counter, fruit_rate, freeze, freeze_time, pause, score, strike, game_over
 
 def usr_slice(events, fruits, score, game_over, freeze, freeze_time):
 
@@ -61,7 +62,7 @@ def game(screen, clock, my_fonts):
 
     running = True
 
-    fruits, counter, fruit_rate, freeze, freeze_time, score, strike, game_over = reset_values()
+    fruits, counter, fruit_rate, freeze, freeze_time, pause, score, strike, game_over = reset_values()
 
     while running:
 
@@ -71,21 +72,22 @@ def game(screen, clock, my_fonts):
 
         game_background_render(screen)
 
-        if escpressed:
-            running = False
+        if escpressed and not pause:
+            pause = True
+            pause_start_time = time.monotonic()
         
         elif game_over:
             if score > read_best_score_file():
                 write_best_score(score)
             game_over, usr_choice = replay_menu_popup(screen, my_fonts, mouseclicked, score)
             if usr_choice == 1:
-                fruits, counter, fruit_rate, freeze, freeze_time, score, strike, game_over = reset_values()
+                fruits, counter, fruit_rate, freeze, freeze_time, pause, score, strike, game_over = reset_values()
                 continue
             elif usr_choice == 2:
                 running = False
         else:
 
-            if not freeze:
+            if not (freeze or pause):
 
                 fruits = move_fruits(fruits, dt)
 
@@ -104,14 +106,30 @@ def game(screen, clock, my_fonts):
 
                 fruits_render(screen, fruits, my_fonts)
 
-            else:
+            elif freeze and not pause:
                 fruits_render(screen, fruits, my_fonts)
                 frozen_effect(screen)
                 if time.monotonic() - freeze_time >= 3.0:
                     freeze = False
-                    
-            fruits, game_over, freeze, freeze_time, score = usr_slice(events, fruits, score, game_over, freeze, freeze_time)
 
+            elif pause:
+                fruits_render(screen, fruits, my_fonts)
+                if freeze:
+                    frozen_effect(screen)
+
+                pause_ui(screen, my_fonts)
+
+                usr_unpause = keyboard_input(events)
+
+                if escpressed:
+                    running = False
+                elif usr_unpause:
+                    freeze_time += time.monotonic() - pause_start_time 
+                    pause = False
+                    continue
+
+            fruits, game_over, freeze, freeze_time, score = usr_slice(events, fruits, score, game_over, freeze, freeze_time)
+            
             ui_render(screen, my_fonts, score, strike)
 
         counter += 1

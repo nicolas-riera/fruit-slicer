@@ -63,7 +63,6 @@ def game(screen, clock, my_fonts):
     time_since_last_fruit = time.time()
     time_since_last_fruit_rate_update = time.time()
     time_since_last_spawn_rate_update = time.time()
-    game_start = time.time()
     time_to_spawn = 1
 
     fruits, fruit_rate, freeze, freeze_time, pause, score, strike, game_over = reset_values()

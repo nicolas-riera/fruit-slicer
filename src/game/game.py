@@ -15,8 +15,7 @@ from src.best_score import *
 def reset_values():
 
     fruits = {}
-    counter = 0 #temporary just for now for me to test new fruits to not be popping all the time 
-    fruit_rate = 90
+    fruit_rate = 1
     freeze = False
     freeze_time = 0
     pause = False
@@ -24,7 +23,7 @@ def reset_values():
     strike = 0
     game_over = False
 
-    return fruits, counter, fruit_rate, freeze, freeze_time, pause, score, strike, game_over
+    return fruits, fruit_rate, freeze, freeze_time, pause, score, strike, game_over
 
 def usr_slice(events, fruits, score, game_over, freeze, freeze_time):
 
@@ -61,8 +60,13 @@ def usr_slice(events, fruits, score, game_over, freeze, freeze_time):
 def game(screen, clock, my_fonts):
 
     running = True
+    time_since_last_fruit = time.time()
+    time_since_last_fruit_rate_update = time.time()
+    time_since_last_spawn_rate_update = time.time()
+    game_start = time.time()
+    time_to_spawn = 1
 
-    fruits, counter, fruit_rate, freeze, freeze_time, pause, score, strike, game_over = reset_values()
+    fruits, fruit_rate, freeze, freeze_time, pause, score, strike, game_over = reset_values()
 
     while running:
 
@@ -81,16 +85,14 @@ def game(screen, clock, my_fonts):
                 write_best_score(score)
             game_over, usr_choice = replay_menu_popup(screen, my_fonts, mouseclicked, score)
             if usr_choice == 1:
-                fruits, counter, fruit_rate, freeze, freeze_time, pause, score, strike, game_over = reset_values()
+                fruits, fruit_rate, freeze, freeze_time, pause, score, strike, game_over = reset_values()
                 continue
             elif usr_choice == 2:
                 running = False
         else:
 
             if not (freeze or pause):
-
                 fruits = move_fruits(fruits, dt)
-
                 out_fruits_id = fruits_out_id(screen, fruits)
                 if out_fruits_id:
                     for id in out_fruits_id:
@@ -101,9 +103,25 @@ def game(screen, clock, my_fonts):
                                 game_over = True
                         del fruits[id]
 
-                if counter % fruit_rate == 0:
-                    fruits = create_fruit(fruits)
+                if time.time() - time_since_last_fruit >= time_to_spawn:
+                    if time_to_spawn == 1 and fruit_rate == 1:
+                        time_to_spawn = 4
+                    fruit_count = random.randint(1, fruit_rate)
+                    for i in range(fruit_count):
+                        print(i)
+                        fruits = create_fruit(fruits)
+        
+                    time_since_last_fruit = time.time()
 
+                if time.time() - time_since_last_fruit_rate_update >= 7.5:
+                    time_since_last_fruit_rate_update = time.time()
+                    fruit_rate += 1
+                
+                if time.time() - time_since_last_spawn_rate_update >= 10.0:
+                    time_since_last_spawn_rate_update = time.time()
+                    if time_to_spawn > 2:
+                        time_to_spawn -= 1
+    
                 fruits_render(screen, fruits, my_fonts)
 
             elif freeze and not pause:
@@ -132,5 +150,4 @@ def game(screen, clock, my_fonts):
             
             ui_render(screen, my_fonts, score, strike)
 
-        counter += 1
         pygame.display.flip()

@@ -60,10 +60,10 @@ def game(screen, clock, my_fonts):
 
     running = True
     time_since_last_fruit = time.time()
-    fruits_done_spawning = False
     time_since_last_fruit_rate_update = time.time()
     time_since_last_spawn_rate_update = time.time()
-    time_to_spawn = 5
+    game_start = time.time()
+    time_to_spawn = 1
 
     fruits, fruit_rate, freeze, freeze_time, score, strike, game_over = reset_values()
 
@@ -102,6 +102,8 @@ def game(screen, clock, my_fonts):
                         del fruits[id]
 
                 if time.time() - time_since_last_fruit >= time_to_spawn:
+                    if time_to_spawn == 1 and fruit_rate == 1:
+                        time_to_spawn = 4
                     fruit_count = random.randint(1, fruit_rate)
                     for i in range(fruit_count):
                         print(i)

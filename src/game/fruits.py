@@ -16,7 +16,7 @@ fruit_id_gen = itertools.count()
 
 def create_fruit(fruits):
 
-    pos = pygame.Vector2(float(random.randint(0, 1280)), float(random.randint(720, 800)))
+    pos = pygame.Vector2(float(random.randint(200, 1080)), float(random.randint(720, 800)))
 
     if pos[0] < 300: # means fruit is at left so needs to go right
         velocity = pygame.Vector2(float(random.randint(20, 500)), float(random.randint(-1250, -1000)))

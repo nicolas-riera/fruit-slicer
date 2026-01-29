@@ -30,6 +30,22 @@ def display_scores(screen, my_fonts, score):
 def game_background_render(screen):
     screen.blit(BACKGROUND_SCALED, BACKGROUND_RECT)
 
+def pause_ui(screen, my_fonts):
+
+    screen_fade = pygame.Surface((screen.get_width(), screen.get_height()))
+    screen_fade.fill((0, 0, 0))
+    screen_fade.set_alpha(80)
+    screen.blit(screen_fade, (0, 0))
+
+    pause_text = my_fonts[4].render("Pause", True, (254, 250, 181))
+    screen.blit(pause_text, (555, 320))
+
+    resume_text = my_fonts[3].render("Press any key to resume.", True, (254, 250, 181))
+    screen.blit(resume_text, (487, 640))
+
+    resume_text = my_fonts[3].render("Press Escape to quit.", True, (254, 250, 181))
+    screen.blit(resume_text, (507, 680))
+
 def ui_render(screen, my_fonts, score, strike):
 
     display_strikes(screen, strike)

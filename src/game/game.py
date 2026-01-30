@@ -20,12 +20,29 @@ def reset_values():
     freeze_time = 0
     pause = False
     score = 0
+    combo = 0
+    combo_timer = 0
+    combo_timeout = 1.2
+    combo_multiplier = 1
     strike = 0
     game_over = False
 
-    return fruits, fruit_rate, freeze, freeze_time, pause, score, strike, game_over
+    return fruits, fruit_rate, freeze, freeze_time, pause, score, combo, combo_timer, combo_timeout, combo_multiplier, strike, game_over
 
-def usr_slice(events, fruits, score, game_over, freeze, freeze_time):
+def usr_slice(
+    events,
+    fruits,
+    score,
+    game_over,
+    freeze,
+    freeze_time,
+    combo,
+    combo_timer,
+    combo_multiplier,
+    combo_timeout
+):
+    
+    sliced_count = 0
 
     usr_input = keyboard_input(events)
 
@@ -43,19 +60,53 @@ def usr_slice(events, fruits, score, game_over, freeze, freeze_time):
 
             elif fruits[key]["fruit_img"][0] == "ice":
                 freeze = True
+                sliced_count += 1
                 freeze_time = time.monotonic()
                 del fruits[key]
 
             else:
+                sliced_count += 1
                 del fruits[key]
 
         if not game_over:
-            if len(to_delete) > 3:
-                score += len(to_delete) + 1
-            else:
-                score += len(to_delete)
+            score, combo, combo_timer, combo_multiplier = update_combo_score(
+            score,
+            sliced_count,
+            combo,
+            combo_timer,
+            combo_multiplier,
+            combo_timeout
+        )
+            
+    return fruits, game_over, freeze, freeze_time, score, combo, combo_timer, combo_multiplier
 
-    return fruits, game_over, freeze, freeze_time, score
+def update_combo_score(
+    score,
+    sliced_count,
+    combo,
+    combo_timer,
+    combo_multiplier,
+    combo_timeout
+):
+    now = time.monotonic()
+
+    if sliced_count > 0:
+        if now - combo_timer <= combo_timeout:
+            combo += sliced_count
+        else:
+            combo = sliced_count
+
+        combo_timer = now
+        combo_multiplier = 1 + combo // 3
+        score += sliced_count * combo_multiplier
+
+    else:
+        if now - combo_timer > combo_timeout:
+            combo = 0
+            combo_multiplier = 1
+
+    return score, combo, combo_timer, combo_multiplier
+
 
 def game(screen, clock, my_fonts):
 
@@ -65,7 +116,7 @@ def game(screen, clock, my_fonts):
     time_since_last_spawn_rate_update = time.time()
     time_to_spawn = 1
 
-    fruits, fruit_rate, freeze, freeze_time, pause, score, strike, game_over = reset_values()
+    fruits, fruit_rate, freeze, freeze_time, pause, score, combo, combo_timer, combo_timeout, combo_multiplier, strike, game_over = reset_values()
 
     while running:
 
@@ -84,7 +135,7 @@ def game(screen, clock, my_fonts):
                 write_best_score(score)
             game_over, usr_choice = replay_menu_popup(screen, my_fonts, mouseclicked, score)
             if usr_choice == 1:
-                fruits, fruit_rate, freeze, freeze_time, pause, score, strike, game_over = reset_values()
+                fruits, fruit_rate, freeze, freeze_time, pause, score, combo, combo_timer, combo_timeout, combo_multiplier, strike, game_over = reset_values()
                 continue
             elif usr_choice == 2:
                 running = False
@@ -145,7 +196,18 @@ def game(screen, clock, my_fonts):
                     pause = False
                     continue
 
-            fruits, game_over, freeze, freeze_time, score = usr_slice(events, fruits, score, game_over, freeze, freeze_time)
+            fruits, game_over, freeze, freeze_time, score, combo, combo_timer, combo_multiplier = usr_slice(
+            events,
+            fruits,
+            score,
+            game_over,
+            freeze,
+            freeze_time,
+            combo,
+            combo_timer,
+            combo_multiplier,
+            combo_timeout
+        )
             
             ui_render(screen, my_fonts, score, strike)
 

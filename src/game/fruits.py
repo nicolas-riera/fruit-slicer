@@ -35,7 +35,7 @@ def create_fruit(fruits):
         "rotation_velocity": rotation_velocity,
         "velocity":velocity,
         "letters": random.choice([l for l in string.ascii_lowercase if l not in  {fruit["letters"] for fruit in fruits.values()}]).lower(),
-        "time_creation": time.time()
+        "time_creation": time.monotonic()
     }
 
     return fruits
@@ -72,7 +72,7 @@ def fruits_out_id(screen, fruits):
     ids = []
 
     for fruit_id, fruit_data in fruits.items():
-        if time.time() - fruit_data["time_creation"] > 1:
+        if time.monotonic() - fruit_data["time_creation"] > 1:
             if fruit_data["pos"][1] > (screen.get_height() + 50):
                 ids.append(fruit_id)
 

@@ -158,7 +158,6 @@ def game(screen, clock, my_fonts):
                         time_to_spawn = 4
                     fruit_count = random.randint(1, min(fruit_rate, 7))
                     for i in range(fruit_count):
-                        print(i)
                         fruits = create_fruit(fruits)
         
                     time_since_last_fruit = time.time()

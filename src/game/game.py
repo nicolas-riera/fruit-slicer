@@ -162,13 +162,14 @@ def game(screen, clock, my_fonts):
         
                     time_since_last_fruit = time.time()
 
-                if time.time() - time_since_last_fruit_rate_update >= 7.5:
+
+                if time.time() - time_since_last_fruit_rate_update >= 15.0:
                     time_since_last_fruit_rate_update = time.time()
                     fruit_rate += 1
                 
-                if time.time() - time_since_last_spawn_rate_update >= 10.0:
+                if time.time() - time_since_last_spawn_rate_update >= 15.0:
                     time_since_last_spawn_rate_update = time.time()
-                    if time_to_spawn > 2:
+                    if time_to_spawn > 2.5:
                         time_to_spawn -= 1
     
                 fruits_render(screen, fruits, my_fonts)
